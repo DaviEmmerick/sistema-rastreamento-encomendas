@@ -66,45 +66,18 @@ O sistema expõe 5 rotas principais para comunicação Cliente-Servidor, atenden
  Validação: Servidor-side (obrigatória)
 ```
 
-## Requisitos Atendidos
-
-```
-┌────────────────────────────────────────────────────────┐
-│                   REQUISITOS NÃO-FUNCIONAIS             │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  [✅] RNF-001  Arquitetura Cliente-Servidor Estrita   │
-│  [✅] RNF-002  Estilo RESTful                         │
-│  [✅] RNF-003  Formato JSON                           │
-│  [✅] RNF-004  Persistência SQLite + SQLAlchemy       │
-│  [✅] RNF-005  Aplicação Stateless                    │
-│                                                        │
-├────────────────────────────────────────────────────────┤
-│                   REQUISITOS FUNCIONAIS                │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  [✅] RF-001   Cadastro de Encomenda                  │
-│  [✅] RF-002   Atribuição de Entregador               │
-│  [✅] RF-003   Busca Pública de Status                │
-│  [✅] RF-004   Atualização de Status                  │
-│  [✅] RF-005   Máquina de Estados Rigorosa            │
-│  [✅] RF-006   Listagem por Entregador                │
-│                                                        │
-└────────────────────────────────────────────────────────┘
-```
-
 ## 🛠️ Tecnologias Utilizadas
 
 ```
 ┌──────────────────────────────────────────────────────┐
-│  Framework/Biblioteca    │ Versão │ Propósito       │
+│  Framework/Biblioteca    │ Versão │ Propósito        │
 ├──────────────────────────────────────────────────────┤
-│  FastAPI                 │ 0.104  │ Web REST        │
-│  Uvicorn                 │ 0.24   │ Servidor ASGI   │
-│  SQLAlchemy              │ 2.0    │ ORM             │
-│  Pydantic                │ 2.5    │ Validação JSON  │
-│  SQLite                  │ Latest │ Banco de Dados  │
-└─────────────────────────────────────────────────────┘
+│  FastAPI                 │ 0.104  │ Web REST         │
+│  Uvicorn                 │ 0.24   │ Servidor ASGI    │
+│  SQLAlchemy              │ 2.0    │ ORM              │
+│  Pydantic                │ 2.5    │ Validação JSON   │
+│  SQLite                  │ Latest │ Banco de Dados   │
+└───────────────────────────────────────────────────── ┘
 ```
 
 ## 🎯 Caso de Uso Completo
