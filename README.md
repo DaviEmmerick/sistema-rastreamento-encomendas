@@ -22,33 +22,17 @@ sistema-rastreamento-encomendas/
 
 ## Endpoints Implementados
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    🚀 5 ENDPOINTS RESTFUL                        │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│ ✅ [201] POST   /encomendas                                     │
-│         → Cria encomenda com código único                       │
-│         → RF-001: Cadastro de Encomenda                         │
-│                                                                  │
-│ ✅ [200] POST   /encomendas/{codigo_rastreio}/atribuir         │
-│         → Atribui entregador                                    │
-│         → RF-002: Atribuição de Entregador                      │
-│                                                                  │
-│ ✅ [200] GET    /encomendas/{codigo_rastreio}                  │
-│         → Busca pública (sem autenticação)                      │
-│         → RF-003: Consulta de Status                            │
-│                                                                  │
-│ ✅ [200] GET    /entregadores/{id_entregador}/encomendas       │
-│         → Lista encomendas do entregador                        │
-│         → RF-006: Listagem por Entregador                       │
-│                                                                  │
-│ ✅ [200] PATCH  /encomendas/{codigo_rastreio}/status           │
-│         → Atualiza status com máquina de estados                │
-│         → RF-004 & RF-005: Atualização de Status                │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 🚀 Endpoints RESTful Implementados
+
+O sistema expõe 5 rotas principais para comunicação Cliente-Servidor, atendendo a todos os requisitos funcionais estabelecidos:
+
+| Método | Endpoint | Descrição | Requisito | Retorno |
+| :--- | :--- | :--- | :--- | :---: |
+| **`POST`** | `/encomendas` | Cria uma nova encomenda gerando um código de rastreio único. | **RF-001** | `201` |
+| **`POST`** | `/encomendas/{codigo}/atribuir` | Atribui um entregador específico a uma encomenda. | **RF-002** | `200` |
+| **`GET`** | `/encomendas/{codigo}` | Busca pública de status da encomenda (sem autenticação). | **RF-003** | `200` |
+| **`GET`** | `/entregadores/{id}/encomendas` | Lista todas as encomendas vinculadas a um entregador. | **RF-006** | `200` |
+| **`PATCH`**| `/encomendas/{codigo}/status` | Atualiza o status validando as regras da máquina de estados. | **RF-004 / 005** | `200` |
 
 ## 🔄 Máquina de Estados
 
