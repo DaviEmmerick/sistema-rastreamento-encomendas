@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <h1>📦 Sistema de Logística Integrada</h1>
+        <p>Arquitetura Cliente-Servidor (REST)</p>
+    </header>
+
     <!-- Profile Selector Navbar -->
     <nav class="profile-navbar">
         <div class="navbar-content">
@@ -25,13 +30,8 @@
         </div>
     </nav>
 
-    <header>
-        <h1>📦 Sistema de Logística Integrada</h1>
-        <p>Arquitetura Cliente-Servidor (REST)</p>
-    </header>
-
     <main>
-        <section class="card" id="area-admin" style="border-left: 5px solid #6c757d;">
+        <section class="card hidden" id="area-admin" style="border-left: 5px solid #6c757d;">
             <h2>⚙️ Central de Despacho (Administrador)</h2>
             <p>Cadastre novos pacotes e atribua entregadores.</p>
             
@@ -60,7 +60,7 @@
                 </div>
         </section>
 
-        <section class="card" id="area-entregador" style="border-left: 5px solid #ffc107;">
+        <section class="card hidden" id="area-entregador" style="border-left: 5px solid #ffc107;">
             <h2>🚚 Painel do Entregador</h2>
             <p>Gerencie suas rotas e atualize o status das entregas.</p>
             <div class="input-group">

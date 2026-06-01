@@ -37,6 +37,17 @@ function trocarPerfil(novoPerfil, inicializando = false) {
     });
     document.querySelector(`[data-profile="${novoPerfil}"]`).classList.add('active');
 
+    // Ocultar todos os cards e mostrar apenas o do perfil selecionado
+    document.querySelectorAll('main .card').forEach(card => {
+        card.classList.add('hidden');
+    });
+    
+    const sectionAtiva = PERFIS[novoPerfil].section;
+    const cardAtivo = document.getElementById(sectionAtiva);
+    if (cardAtivo) {
+        cardAtivo.classList.remove('hidden');
+    }
+
     // Restaurar dados do novo perfil
     restaurarDadosPerfil(novoPerfil);
 }
