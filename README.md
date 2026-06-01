@@ -22,33 +22,17 @@ sistema-rastreamento-encomendas/
 
 ## Endpoints Implementados
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    🚀 5 ENDPOINTS RESTFUL                        │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│ ✅ [201] POST   /encomendas                                     │
-│         → Cria encomenda com código único                       │
-│         → RF-001: Cadastro de Encomenda                         │
-│                                                                  │
-│ ✅ [200] POST   /encomendas/{codigo_rastreio}/atribuir         │
-│         → Atribui entregador                                    │
-│         → RF-002: Atribuição de Entregador                      │
-│                                                                  │
-│ ✅ [200] GET    /encomendas/{codigo_rastreio}                  │
-│         → Busca pública (sem autenticação)                      │
-│         → RF-003: Consulta de Status                            │
-│                                                                  │
-│ ✅ [200] GET    /entregadores/{id_entregador}/encomendas       │
-│         → Lista encomendas do entregador                        │
-│         → RF-006: Listagem por Entregador                       │
-│                                                                  │
-│ ✅ [200] PATCH  /encomendas/{codigo_rastreio}/status           │
-│         → Atualiza status com máquina de estados                │
-│         → RF-004 & RF-005: Atualização de Status                │
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 🚀 Endpoints RESTful Implementados
+
+O sistema expõe 5 rotas principais para comunicação Cliente-Servidor, atendendo a todos os requisitos funcionais estabelecidos:
+
+| Método | Endpoint | Descrição | Requisito | Retorno |
+| :--- | :--- | :--- | :--- | :---: |
+| **`POST`** | `/encomendas` | Cria uma nova encomenda gerando um código de rastreio único. | **RF-001** | `201` |
+| **`POST`** | `/encomendas/{codigo}/atribuir` | Atribui um entregador específico a uma encomenda. | **RF-002** | `200` |
+| **`GET`** | `/encomendas/{codigo}` | Busca pública de status da encomenda (sem autenticação). | **RF-003** | `200` |
+| **`GET`** | `/entregadores/{id}/encomendas` | Lista todas as encomendas vinculadas a um entregador. | **RF-006** | `200` |
+| **`PATCH`**| `/encomendas/{codigo}/status` | Atualiza o status validando as regras da máquina de estados. | **RF-004 / 005** | `200` |
 
 ## 🔄 Máquina de Estados
 
@@ -82,45 +66,18 @@ sistema-rastreamento-encomendas/
  Validação: Servidor-side (obrigatória)
 ```
 
-## Requisitos Atendidos
-
-```
-┌────────────────────────────────────────────────────────┐
-│                   REQUISITOS NÃO-FUNCIONAIS             │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  [✅] RNF-001  Arquitetura Cliente-Servidor Estrita   │
-│  [✅] RNF-002  Estilo RESTful                         │
-│  [✅] RNF-003  Formato JSON                           │
-│  [✅] RNF-004  Persistência SQLite + SQLAlchemy       │
-│  [✅] RNF-005  Aplicação Stateless                    │
-│                                                        │
-├────────────────────────────────────────────────────────┤
-│                   REQUISITOS FUNCIONAIS                │
-├────────────────────────────────────────────────────────┤
-│                                                        │
-│  [✅] RF-001   Cadastro de Encomenda                  │
-│  [✅] RF-002   Atribuição de Entregador               │
-│  [✅] RF-003   Busca Pública de Status                │
-│  [✅] RF-004   Atualização de Status                  │
-│  [✅] RF-005   Máquina de Estados Rigorosa            │
-│  [✅] RF-006   Listagem por Entregador                │
-│                                                        │
-└────────────────────────────────────────────────────────┘
-```
-
 ## 🛠️ Tecnologias Utilizadas
 
 ```
 ┌──────────────────────────────────────────────────────┐
-│  Framework/Biblioteca    │ Versão │ Propósito       │
+│  Framework/Biblioteca    │ Versão │ Propósito        │
 ├──────────────────────────────────────────────────────┤
-│  FastAPI                 │ 0.104  │ Web REST        │
-│  Uvicorn                 │ 0.24   │ Servidor ASGI   │
-│  SQLAlchemy              │ 2.0    │ ORM             │
-│  Pydantic                │ 2.5    │ Validação JSON  │
-│  SQLite                  │ Latest │ Banco de Dados  │
-└─────────────────────────────────────────────────────┘
+│  FastAPI                 │ 0.104  │ Web REST         │
+│  Uvicorn                 │ 0.24   │ Servidor ASGI    │
+│  SQLAlchemy              │ 2.0    │ ORM              │
+│  Pydantic                │ 2.5    │ Validação JSON   │
+│  SQLite                  │ Latest │ Banco de Dados   │
+└───────────────────────────────────────────────────── ┘
 ```
 
 ## 🎯 Caso de Uso Completo
