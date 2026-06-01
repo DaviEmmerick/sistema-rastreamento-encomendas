@@ -1,8 +1,92 @@
 const API_URL = "http://127.0.0.1:8000";
 
 // ==========================================
-// FUNÇÕES DO MODAL CUSTOMIZADO
+// GERENCIAMENTO DE PERFIS
 // ==========================================
+
+// Perfis disponíveis
+const PERFIS = {
+    'admin': { nome: 'Administrador', section: 'area-admin' },
+    'cliente': { nome: 'Cliente', section: 'area-cliente' },
+    'entregador': { nome: 'Entregador', section: 'area-entregador' }
+};
+
+// Inicializar perfil ao carregar página
+document.addEventListener('DOMContentLoaded', function() {
+    const perfilSalvo = localStorage.getItem('perfilAtivo') || 'cliente';
+    trocarPerfil(perfilSalvo, true);
+});
+
+/**
+ * Trocar de perfil e salvar preferência
+ * @param {string} novoPerfil - ID do perfil (admin, cliente, entregador)
+ * @param {boolean} inicializando - Flag para saber se é inicialização
+ */
+function trocarPerfil(novoPerfil, inicializando = false) {
+    // Salvar dados do perfil anterior
+    if (!inicializando) {
+        salvarDadosPerfil();
+    }
+
+    // Atualizar localStorage
+    localStorage.setItem('perfilAtivo', novoPerfil);
+
+    // Atualizar botões ativos
+    document.querySelectorAll('.profile-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-profile="${novoPerfil}"]`).classList.add('active');
+
+    // Restaurar dados do novo perfil
+    restaurarDadosPerfil(novoPerfil);
+}
+
+/**
+ * Salvar dados dos inputs do perfil atual
+ */
+function salvarDadosPerfil() {
+    const perfilAtual = localStorage.getItem('perfilAtivo');
+    if (!perfilAtual) return;
+
+    const dadosPerfil = {};
+    
+    // Salvar todos os inputs
+    document.querySelectorAll('input').forEach(input => {
+        if (input.id) {
+            dadosPerfil[input.id] = input.value;
+        }
+    });
+
+    // Salvar no localStorage
+    localStorage.setItem(`dados_${perfilAtual}`, JSON.stringify(dadosPerfil));
+}
+
+/**
+ * Restaurar dados do perfil selecionado
+ * @param {string} perfil - ID do perfil
+ */
+function restaurarDadosPerfil(perfil) {
+    // Limpar todos os inputs
+    document.querySelectorAll('input').forEach(input => {
+        input.value = '';
+    });
+
+    // Restaurar dados salvos
+    const dadosSalvos = localStorage.getItem(`dados_${perfil}`);
+    if (dadosSalvos) {
+        try {
+            const dados = JSON.parse(dadosSalvos);
+            Object.keys(dados).forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.value = dados[inputId];
+                }
+            });
+        } catch (e) {
+            console.log('Erro ao restaurar dados:', e);
+        }
+    }
+}
 function mostrarAlerta(titulo, mensagem, tipo = 'success') {
     const modal = document.getElementById('customModal');
     const modalBox = modal.querySelector('.modal-box');
@@ -47,6 +131,7 @@ async function cadastrarEncomenda() {
             
             document.getElementById('novaDescricao').value = ''; 
             document.getElementById('codigoAtribuir').value = data.codigo_rastreio;
+            salvarDadosPerfil();
         } else {
             mostrarAlerta("❌ Erro", data.detail, "error");
         }
@@ -77,6 +162,7 @@ async function atribuirEntregador() {
             mostrarAlerta("✅ Sucesso", `Entregador <strong>${idEntregador}</strong> atribuído ao pacote <strong>${codigo}</strong> com sucesso!`, "success");
             document.getElementById('codigoAtribuir').value = '';
             document.getElementById('idAtribuir').value = '';
+            salvarDadosPerfil();
             
             if (document.getElementById('idEntregador').value == idEntregador) {
                 carregarPainel();
@@ -110,6 +196,7 @@ async function rastrearEncomenda() {
                 <p><strong>Código:</strong> ${data.codigo_rastreio}</p>
                 <p><strong>Descrição:</strong> ${data.descricao}</p>
             `;
+            salvarDadosPerfil();
         } else {
             divResultado.innerHTML = `<p style="color: red;">❌ Erro: ${data.detail}</p>`;
         }
@@ -136,6 +223,7 @@ async function carregarPainel() {
 
         if (encomendas.length === 0) {
             divLista.innerHTML += `<p>Nenhuma entrega pendente para você.</p>`;
+            salvarDadosPerfil();
             return;
         }
 
@@ -162,6 +250,8 @@ async function carregarPainel() {
                 </div>
             `;
         });
+
+        salvarDadosPerfil();
     } catch (error) {
         mostrarAlerta("Erro", "Erro ao conectar com o servidor ao carregar painel.", "error");
     }
@@ -183,6 +273,7 @@ async function atualizarStatus(codigo_rastreio, novo_status) {
         const data = await response.json();
 
         if (response.ok) {
+            salvarDadosPerfil();
             carregarPainel();
         } else {
             mostrarAlerta("❌ Erro", data.detail, "error");

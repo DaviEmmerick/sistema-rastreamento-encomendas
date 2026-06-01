@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Profile Selector Navbar -->
+    <nav class="profile-navbar">
+        <div class="navbar-content">
+            <h3>Selecione seu Perfil:</h3>
+            <div class="profile-buttons">
+                <button class="profile-btn active" data-profile="admin" onclick="trocarPerfil('admin')">
+                    ⚙️ Administrador
+                </button>
+                <button class="profile-btn" data-profile="cliente" onclick="trocarPerfil('cliente')">
+                    🔍 Cliente
+                </button>
+                <button class="profile-btn" data-profile="entregador" onclick="trocarPerfil('entregador')">
+                    🚚 Entregador
+                </button>
+            </div>
+        </div>
+    </nav>
+
     <header>
         <h1>📦 Sistema de Logística Integrada</h1>
         <p>Arquitetura Cliente-Servidor (REST)</p>

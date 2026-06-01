@@ -13,6 +13,98 @@ body {
     align-items: center;
 }
 
+/* ==========================================
+   PROFILE NAVBAR STYLES
+============================================= */
+.profile-navbar {
+    background-color: #fff;
+    width: 100%;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid #0046ad;
+}
+
+.navbar-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.navbar-content h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.profile-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-btn {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    background-color: white;
+    color: #333;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.profile-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Active profile styles */
+.profile-btn.active[data-profile="admin"] {
+    background-color: #6c757d;
+    color: white;
+    border-color: #6c757d;
+}
+
+.profile-btn.active[data-profile="cliente"] {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.profile-btn.active[data-profile="entregador"] {
+    background-color: #ffc107;
+    color: black;
+    border-color: #ffc107;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .navbar-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-content h3 {
+        width: 100%;
+    }
+
+    .profile-buttons {
+        width: 100%;
+    }
+
+    .profile-btn {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
 header {
     background-color: #0046ad; /* Azul escuro (Estilo UFF) */
     color: white;
